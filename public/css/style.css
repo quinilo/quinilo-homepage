@@ -8,7 +8,7 @@
 
 :root {
     --white-color:                  #ffffff;
-    --primary-color:                #FF4040;
+    --primary-color: #69ff49;
     --secondary-color:              #EE5007;
     --section-bg-color:             #f0f8ff;
     --custom-btn-bg-color:          #EE5007;
@@ -17,6 +17,7 @@
     --p-color:                      #cccccc;
     --border-color:                 #7fffd4;
     --link-hover-color:             #B22727;
+    --highlight: #120f20;
 }
 
 body {
@@ -32,6 +33,45 @@ p {
     color: var(--p-color);
 }
 
+.bg-highlight {
+    background-color: var(--highlight);
+}
+
+.preview-code {
+    white-space: pre-wrap;
+}
+
+.preview-code-div {
+    background-color: var(--highlight);
+    width: 90%;
+    border-radius: 15px;
+    padding: 10px;
+    margin-top: 50px;
+    border-right: 2px solid black;
+    animation: blink-caret 0.75s step-end infinite;
+}
+
+.image-container {
+    width: 700px;  /* Definiere die Breite der Fläche */
+    height: 200px; /* Definiere die Höhe der Fläche */
+    overflow: hidden;
+    position: relative;
+}
+
+.home-image {
+    width: 100%;  /* Definiere die Breite der Fläche */
+    height: 200px;
+    border-radius: 20px;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Bild wird so skaliert, dass es die gesamte Fläche ausfüllt */
+    object-position: center; /* Bild wird zentriert */
+}
+
+
 .highlight {
     color: #f35f5f;
 }
@@ -43,4 +83,14 @@ p {
 input,
 label {
     background-color: var(--background-color);
+}
+
+.white {
+    color: white;
+}
+
+@media only screen and (max-width: 1000px) {
+    .mobile-invisible {
+        display: none;
+    }
 }

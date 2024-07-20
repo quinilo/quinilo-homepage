@@ -1,0 +1,22 @@
+$primary: #69ff49;
+$background: #2D3033;
+$text: #cccccc;
+
+$input-bg:                              #26292c;
+$input-color:                           $text;
+$input-border-width:                    2px;
+$input-border-color:                    $primary;
+$input-focus-border-color:              $primary;
+$input-placeholder-color:               #838282;
+
+$primary-text-emphasis-dark:   $primary;
+$primary-bg-subtle-dark:       #303338;
+$primary-border-subtle-dark:   null;
+
+$font-size-base: 1.2rem;
+$btn-padding-y: 1rem;
+$btn-padding-x: 1.5rem;
+$input-padding-y: 1rem;
+$input-padding-x: 1.5rem;
+
+@import "../../node_modules/bootstrap/scss/bootstrap";

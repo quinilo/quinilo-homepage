@@ -1,8 +1,144 @@
 <%- include('head') %>
 
 <div class="container">
-    <h1>QUINILO</h1>
-    <p>Java & JavaScript developer</p>
+
+    <div class="row ">
+        <div class="col-5 order-first mt-5">
+            <div class="text-center mt-5">
+                <img class="rounded-circle" style="width: 300px" src="/img/profile.jpg" alt="..."/>
+                <h5 class="title mt-3" style="font-size: 40px;">QUINILO</h5>
+                <p class="fst-italic"><%= lang.subtitle %></p>
+            </div>
+        </div>
+        <div class="col-lg-6 mobile-invisible">
+            <<div id="code-container" class="preview-code-div">
+                <code class="preview-code d-block" id="1"> </code>
+                <code class="preview-code d-block" id="2"> </code>
+                <code class="preview-code d-block" id="3"> </code>
+                <code class="preview-code d-block" id="4"> </code>
+                <code class="preview-code d-block" id="5"> </code>
+                <code class="preview-code d-block" id="6"> </code>
+                <code class="preview-code d-block" id="7"> </code>
+                <code class="preview-code d-block" id="8"> </code>
+                <code class="preview-code d-block" id="9"> </code>
+                <code class="preview-code d-block" id="10"> </code>
+                <code class="preview-code d-block" id="11"> </code>
+                <code class="preview-code d-block" id="12"> </code>
+                <code class="preview-code d-block" id="13"> </code>
+                <code class="preview-code d-block" id="14"> </code>
+                <code class="preview-code d-block" id="15"> </code>
+            </div>
+        </div>
+    </div>
+
+    <div class="image-container home-image mt-5">
+        <div class="card bg-dark text-white" style="max-width: 100%;">
+            <img src="/img/bg-1.png" class="card-img" alt="Stony Beach"/>
+            <div class="card-img-overlay" style="background-color: rgba(0, 0, 0, 0.3)">
+                <h5 class="title" style="font-size: 40px;">DU SUCHST NACH MEINEN PLUGINS?</h5>
+                <p style="position: absolute; width: 500px" class="mobile-invisible">asd asdasd asd asd afhsfjkg hgdfjkh dfjklgh dfkjclgh djkgh dfjkgh djkgh dfjkgh dfjkgh djkgh dfk</p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-end"><a class="btn btn-primary bold" href="#" role="button">PLUGINS PAGE</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="py-5">
+
+        <h1 class="title" style="padding-top: 100px">PROJECTS</h1>
+
+        <div class="container px-5 my-5">
+            <div class="row gx-5 align-items-center">
+                <div class="col-lg-6 order-first order-lg-last">
+                    <img class="img-fluid rounded mb-5 mb-lg-0" src="/img/streamline-website.png" alt="..." />
+                </div>
+                <div class="col-lg-6">
+                    <p class="bold" style="font-size: 30px">StreamlineCloud</p>
+                    <p class="lead fw-normal mb-0">Anfang 2024 habe ich mit creperozelot begonnen, ein Minecraft-CloudSystem zu entwickeln. Mit StreamlineCloud legen wir großen Wert auf modularität, effizienz und anfängerfreundlichkeit. <a class="bold mt-4" href="https://streamlinemc.cloud" target="_blank">WEBSEITE</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container px-5 my-5">
+            <div class="row gx-5 align-items-center">
+                <div class="col-lg-6"><img class="img-fluid rounded mb-5 mb-lg-0" src="/img/about-1.png" alt="..." /></div>
+                <div class="col-lg-6">
+                    <p class="bold" style="font-size: 30px">The-Flames</p>
+                    <p class="lead fw-normal mb-0">Anfang 2024 habe ich mit creperozelot begonnen, ein Minecraft-CloudSystem zu entwickeln. Mit StreamlineCloud legen wir großen Wert auf modularität, effizienz und anfängerfreundlichkeit. <a class="bold mt-4" href="https://the-flames.de" target="_blank">WEBSEITE</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mt-5">
+        <h1 class="title">PROJECTS</h1>
+        <div class="row gx-5 row-cols-1 row-cols-sm-2 row-cols-xl-4 justify-content-center">
+            <div class="col">
+                <img class="img-fluid rounded-3 my-5 p-4 h-50 w-100 h-75" src="/img/streamline-website.png" alt="..."/>
+            </div>
+            <div class="col">
+                <h5 class="fw-bolder title">StreamlineCloud</h5>
+                <p class="fst-italic">ADMIN, DEV</p>
+            </div>
+        </div>
+        </section>
+    </div>
+
 </div>
+
+<img class="img-fluid rounded-3 my-5 p-4 h-50" src="/img/code.png" alt="..."/>
+
+<script>
+    const codeContainer = document.getElementById('code-container');
+    const codeElements = codeContainer.querySelectorAll('code');
+
+    // Funktion um nacheinander alle Zeilen zu animieren
+    function animateSequentially(elements, index = 0) {
+
+        if (index < elements.length) {
+            animateCode(elements[index], () => {
+                animateSequentially(elements, index + 1);
+            });
+        }
+    }
+
+    // Animation einer einzelnen Zeile
+    function animateCode(element, callback) {
+        var text = " "
+        if (element.id === "1") text = "public class Quinilo {"
+        if (element.id === "3") text = "    String os, langs;"
+        if (element.id === "5") text = "    public Quinilo(String os, String langs) {"
+        if (element.id === "6") text = "        this.os = os;"
+        if (element.id === "7") text = "        this.langs = langs;"
+        if (element.id === "8") text = "    }"
+        if (element.id === "9") text = "}"
+        if (element.id === "11") text = "public static void main(String args[]) {"
+        if (element.id === "12") text = "    new Quinilo("
+        if (element.id === "13") text = "        'Arch btw.',"
+        if (element.id === "14") text = "        'Java & JavaScript');"
+        if (element.id === "15") text = "}"
+        element.textContent = '';
+        element.classList.add('code-animation');
+        let i = 0;
+
+        const interval = setInterval(() => {
+            element.textContent += text.charAt(i);
+            i++;
+            if (i === text.length) {
+                clearInterval(interval);
+                element.classList.remove('code-animation');
+                if (callback) callback();
+            }
+        }, 15); // Geschwindigkeit der Zeichenanimation
+    }
+
+    // Start der Animation
+    animateSequentially(codeElements);
+</script>
 
 <%- include('foot') %>
