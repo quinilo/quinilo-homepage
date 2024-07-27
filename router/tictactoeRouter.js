@@ -5,10 +5,6 @@ function lang(code) {
     return require('../lang/' + code + ".json");
 }
 
-router.get('/contact', (req, res) => {
-    res.render("contact", {lang: lang(req.lang)})
-});
-
 router.get('/', (req, res) => {
     console.log("test")
     res.render("index", {lang: lang(req.lang)})
