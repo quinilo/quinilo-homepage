@@ -6,11 +6,6 @@ const app = express()
 const baseRouter = require('./router/baseRouter')
 const tictactoeRouter = require('./router/tictactoeRouter')
 
-//testa
-//testt
-//test
-//test
-
 app.use('/:lang', (req, res, next) => {
     req.lang = req.params.lang;
     console.log(req.lang)
