@@ -7,7 +7,7 @@ const baseRouter = require('./router/baseRouter')
 const tictactoeRouter = require('./router/tictactoeRouter')
 
 //testa
-//test
+//testt
 
 app.use('/:lang', (req, res, next) => {
     req.lang = req.params.lang;
