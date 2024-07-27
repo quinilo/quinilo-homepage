@@ -6,8 +6,11 @@ function lang(code) {
 }
 
 router.get('/', (req, res) => {
-    console.log("test")
-    res.render("index", {lang: lang(req.lang)})
+    res.render("tictactoe/home", {lang: lang(req.lang)})
+});
+
+router.get('/waiting', (req, res) => {
+    res.render("tictactoe/waiting", {lang: lang(req.lang)})
 });
 
 module.exports = router;

@@ -10,7 +10,6 @@ router.get('/contact', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-    console.log("test")
     res.render("index", {lang: lang(req.lang)})
 });
 

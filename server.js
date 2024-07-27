@@ -8,11 +8,11 @@ const tictactoeRouter = require('./router/tictactoeRouter')
 
 app.use('/:lang', (req, res, next) => {
     req.lang = req.params.lang;
-    console.log(req.lang)
     if (req.params.lang !== "en") if (req.lang !== "de") req.lang = "de"
     next();
 });
 app.use('/:lang/', baseRouter);
+app.use('/:lang/tictactoe/', tictactoeRouter)
 
 app.get("/", function(req, res)  {
     res.redirect("/de/")
