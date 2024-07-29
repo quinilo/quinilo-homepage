@@ -4,14 +4,14 @@
 
     <div class="col">
         <div style="max-width: 500px" class="m-5">
-            <form>
+            <form action="/en/tictactoe/" method="post">
                 <div class="mb-3">
                     <p class="bold" style="font-size: 25px">NAME</p>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" required>
+                    <input type="text" class="form-control" name="name" placeholder="" required>
                 </div>
                 <div class="mb-3">
                     <p class="bold" style="font-size: 25px">GAME-ID</p>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" required>
+                    <input type="text" class="form-control" name="id" placeholder="" required>
                 </div>
                 <button type="submit" class="btn btn-primary bold">JOIN</button>
             </form>
