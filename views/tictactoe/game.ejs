@@ -28,48 +28,75 @@
 <div id="game" style="display: none">
     <div class="container">
 
-        <h1 class="title" id="title">quinilo vs kekw</h1>
+        <h1 class="title mt-5" id="title">loading title</h1>
 
-        <div class="w-50">
-            <div class="row">
-                <p class="col title" id="ttt-1">
-                    |
-                </p>
-                <p class="col title" id="ttt-2">
-                    |
-                </p>
-                <p class="col title" id="ttt-3">
-                    |
-                </p>
-            </div>
+        <div class="d-flex justify-content-center align-items-center">
 
-            <div class="row">
-                <p class="col title" id="ttt-4">
-                    |
-                </p>
-                <p class="col title" id="ttt-5">
-                    -
-                </p>
-                <p class="col title" id="ttt-6">
-                    -
-                </p>
-            </div>
+            <div class="w-50 m-5 ttt-board">
+                <div class="row">
+                    <p class="col-4 title" id="ttt-1">
+                        |
+                    </p>
+                    <p class="col-4 title" id="ttt-2">
+                        |
+                    </p>
+                    <p class="col-4 title" id="ttt-3">
+                        |
+                    </p>
+                </div>
 
-            <div class="row">
-                <p class="col title" id="ttt-7">
-                    -
-                </p>
-                <p class="col title" id="ttt-8">
-                    -
-                </p>
-                <p class="col title" id="ttt-9">
-                    -
-                </p>
+                <div class="row">
+                    <p class="col-4 title" id="ttt-4">
+                        |
+                    </p>
+                    <p class="col-4 title" id="ttt-5">
+                        -
+                    </p>
+                    <p class="col-4 title" id="ttt-6">
+                        -
+                    </p>
+                </div>
+
+                <div class="row">
+                    <p class="col-4 title" id="ttt-7">
+                        -
+                    </p>
+                    <p class="col-4 title" id="ttt-8">
+                        -
+                    </p>
+                    <p class="col-4 title" id="ttt-9">
+                        -
+                    </p>
+                </div>
             </div>
         </div>
 
     </div>
 </div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Debug
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 bold" id="staticBackdropLabel">Debug info</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="debug-modal">
+                debug indo not provided
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
 
@@ -86,17 +113,38 @@
         console.log(game.board.at(1))
 
         for (let row = 1; row < 10; row++) {
+            let data = "class='btn-disabled'"
 
-            document.getElementById("ttt-" + row).innerHTML = "<button>" + game.board.at(row - 1) + "</button>"
+            if (game.board.at(row - 1) === "️️️️️️️️️️️▪️") data = ""
+
+            document.getElementById("ttt-" + row).innerHTML = "<button " + " onclick='click(" + (row - 1) + ")'>" + game.board.at(row - 1) + "</button>"
 
         }
+    }
+
+    function click(number) {
+        console.log("test1")
+        fetch("/en/tictactoe/place/" + id + "/" + token + "/" + number)
+            .then(response => {
+                // Überprüfen, ob die Antwort erfolgreich war
+                if (!response.ok) {
+                    throw new Error('Netzwerkantwort war nicht ok');
+                }
+                return response.json(); // Antwort in JSON umwandeln
+            })
+            .then(data => {
+                console.log("test2")
+            })
+            .catch(error => {
+                console.error('Es gab ein Problem mit der fetch-Operation:', error);
+            });
     }
 
     function refreshDisplay() {
 
         if (game.state === "waiting") {
             document.getElementById("loading").style.display = "none"
-            document.getElementById("game").style.display = "none"
+            document.getElementById("game").style.display = "block"
             document.getElementById("waiting").style.display = "block"
 
         } else if (game.state === "ingame") {
@@ -104,7 +152,7 @@
             document.getElementById("waiting").style.display = "none"
             document.getElementById("game").style.display = "block"
 
-            document.getElementById("title").innerText = game.p1 + " vs " + game.p2
+            document.getElementById("title").innerHTML = game.p1.symbol + " (" + game.p1.name + ") <br> " + game.p2.symbol + " (" + game.p2.name + ")"
 
             renderBoard()
         }
@@ -122,7 +170,11 @@
             })
             .then(data => {
                 game = data;
+
+                document.getElementById("debug-modal").innerHTML = "Version: " + game.version + "<br>State: " + game.state + "<br>Token: " + token
+
                 refreshDisplay()
+                renderBoard()
                 console.log(data); // Daten aus der Antwort verarbeiten
             })
             .catch(error => {
@@ -159,6 +211,54 @@
         }
         100% {
             transform: rotate(360deg);
+        }
+    }
+
+    .ttt-board {
+        background-color: var(--highlight);
+        border-radius: 25px;
+        padding: 20px;
+        max-width: 390px;
+        min-width: 240px;
+    }
+
+        /* CSS */
+    button {
+        background-color: rgba(183, 183, 183, 0.35);
+        border-radius: 8px;
+        border-width: 0;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 30px;
+        font-weight: 500;
+        line-height: 20px;
+        list-style: none;
+        padding: 20px;
+        text-align: center;
+        transition: all 200ms;
+        vertical-align: baseline;
+        white-space: nowrap;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        margin: 17px;
+    }
+
+    button:hover {
+        background-color: rgba(183, 183, 183, 0.66);
+    }
+
+    .btn.disabled:hover{
+        background-color: rgba(183, 183, 183, 0.35);
+    }
+
+    @media (max-width: 800px) {
+        button {
+            margin: 7px;
+            padding: 10px;
+            font-size: 20px;
         }
     }
 </style>
