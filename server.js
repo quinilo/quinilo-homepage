@@ -1,12 +1,20 @@
 const express = require("express")
 const fs = require('fs');
 const path = require("path");
+const https = require('https');
 const app = express()
-
 const maintenance = true
-
 const baseRouter = require('./router/baseRouter')
 const tictactoeRouter = require('./router/tictactoeRouter')
+
+const options = {
+    key: fs.readFileSync('/etc/letsencrypt/live/deine-domain.de/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/deine-domain.de/fullchain.pem')
+};
+
+https.createServer(options, app).listen(443, () => {
+    console.log('HTTPS-Server läuft auf Port 443');
+});
 
 app.use('/:lang', (req, res, next) => {
     req.lang = req.params.lang;
