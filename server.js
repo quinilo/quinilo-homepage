@@ -12,7 +12,7 @@ const options = {
     cert: fs.readFileSync('fullchain.pem')
 };
 
-https.createServer(options, app).listen(443, () => {
+https.createServer(options, app).listen(80, () => {
     console.log('HTTPS-Server läuft auf Port 443');
 });
 
@@ -43,14 +43,6 @@ function lang(code) {
 
 app.use(function(req, res, next) {
     res.render("404", {lang: lang(req.lang)});
-});
-
-const http = require('http');
-http.createServer((req, res) => {
-    res.writeHead(301, { "Location": `https://${req.headers.host}${req.url}` });
-    res.end();
-}).listen(80, () => {
-    console.log('HTTP-Server läuft auf Port 80 und leitet auf HTTPS um');
 });
 
 module.exports = maintenance
