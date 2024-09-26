@@ -10,6 +10,11 @@ router.get('/contact', (req, res) => {
 });
 
 router.get('/', (req, res) => {
+    if (require('../server')) {
+        res.render("maintenance", {lang: lang(req.lang)})
+        return
+    }
+
     res.render("index", {lang: lang(req.lang)})
 });
 

@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require("path");
 const app = express()
 
-//deine mudda 123 ofenäse121
+const maintenance = true
 
 const baseRouter = require('./router/baseRouter')
 const tictactoeRouter = require('./router/tictactoeRouter')
@@ -37,5 +37,6 @@ app.use(function(req, res, next) {
     res.render("404", {lang: lang(req.lang)});
 });
 
-
 app.listen(80)
+
+module.exports = maintenance
