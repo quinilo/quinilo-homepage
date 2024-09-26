@@ -45,6 +45,12 @@ app.use(function(req, res, next) {
     res.render("404", {lang: lang(req.lang)});
 });
 
-app.listen(80)
+const http = require('http');
+http.createServer((req, res) => {
+    res.writeHead(301, { "Location": `https://${req.headers.host}${req.url}` });
+    res.end();
+}).listen(80, () => {
+    console.log('HTTP-Server läuft auf Port 80 und leitet auf HTTPS um');
+});
 
 module.exports = maintenance
