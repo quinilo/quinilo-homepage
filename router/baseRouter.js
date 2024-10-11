@@ -9,6 +9,10 @@ router.get('/contact', (req, res) => {
     res.render("contact", {lang: lang(req.lang)})
 });
 
+router.get('/fancy', (req, res) => {
+    res.render("fancy", {lang: lang(req.lang)})
+})
+
 router.get('/', (req, res) => {
     if (require('../server')) {
         res.render("maintenance", {lang: lang(req.lang)})

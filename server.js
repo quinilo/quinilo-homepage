@@ -3,18 +3,22 @@ const fs = require('fs');
 const path = require("path");
 const https = require('https');
 const app = express()
-const maintenance = true
+const maintenance = false
 const baseRouter = require('./router/baseRouter')
 const tictactoeRouter = require('./router/tictactoeRouter')
 
-const options = {
-    key: fs.readFileSync('privkey.pem'),
-    cert: fs.readFileSync('fullchain.pem')
-};
+const ssl = false
 
-https.createServer(options, app).listen(443, () => {
-    console.log('HTTPS server is running on 443');
-});
+if (ssl) {
+    const options = {
+        key: fs.readFileSync('privkey.pem'),
+        cert: fs.readFileSync('fullchain.pem')
+    };
+
+    https.createServer(options, app).listen(443, () => {
+        console.log('HTTPS server is running on 443');
+    });
+}
 
 app.use('/:lang', (req, res, next) => {
     req.lang = req.params.lang;
@@ -45,12 +49,16 @@ app.use(function(req, res, next) {
     res.render("404", {lang: lang(req.lang)});
 });
 
-const http = require('http');
-http.createServer((req, res) => {
-    res.writeHead(301, { "Location": `https://${req.headers.host}${req.url}` });
-    res.end();
-}).listen(80, () => {
-    console.log('Redirect server running on 80');
-});
+if (ssl) {
+    const http = require('http');
+    http.createServer((req, res) => {
+        res.writeHead(301, { "Location": `https://${req.headers.host}${req.url}` });
+        res.end();
+    }).listen(80, () => {
+        console.log('Redirect server running on 80');
+    });
+} else {
+    app.listen(8080, () => {})
+}
 
 module.exports = maintenance

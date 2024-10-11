@@ -48,6 +48,60 @@
         </div>
     </div>
 
+    <section>
+        <div class="image-container">
+            <img src="/img/profile.jpg" alt="Bild 1" class="image image1">
+            <img src="/img/code.png" alt="Bild 2" class="image image2">
+        </div>
+    </section>
+
+    <style>
+        .image-container {
+            position: relative;
+            width: 500px;
+            height: 500px;
+        }
+
+        .image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .image1 {
+            z-index: 1;
+        }
+
+        .image2 {
+            z-index: 2;
+            opacity: 0;
+        }
+
+        .image-container:hover .image2 {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+    </style>
+
+    <script>
+        const imageContainer = document.querySelector('.image-container');
+
+        imageContainer.addEventListener('mousemove', function(e) {
+            const rect = imageContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left; // X-Koordinate der Maus relativ zum Bild
+            const y = e.clientY - rect.top;  // Y-Koordinate der Maus relativ zum Bild
+
+            const image1 = document.querySelector('.image1');
+            const image2 = document.querySelector('.image2');
+
+            // Bewegung der Bilder basierend auf der Mausposition
+            const moveFactor = 20;  // Wie stark die Bewegung sein soll
+            image1.style.transform = `translate(${(x / rect.width - 0.5) * moveFactor}px, ${(y / rect.height - 0.5) * moveFactor}px)`;
+            image2.style.transform = `translate(${-(x / rect.width - 0.5) * moveFactor}px, ${-(y / rect.height - 0.5) * moveFactor}px)`;
+        });
+    </script>
+
     <section class="py-5">
 
         <h1 class="title" style="padding-top: 100px">PROJECTS</h1>
@@ -140,5 +194,8 @@
     // Start der Animation
     animateSequentially(codeElements);
 </script>
+
+<style>
+</style>
 
 <%- include('foot') %>
